@@ -1,0 +1,7 @@
+C:\Users\Administrator\Desktop\BWQS\BWQS\bin\System.Linq.Dynamic.BitWise.Service.dll
+C:\Users\Administrator\Desktop\BWQS\BWQS\bin\System.Linq.Dynamic.BitWise.Service.pdb
+C:\Users\Administrator\Desktop\BWQS\BWQS\bin\Newtonsoft.Json.dll
+C:\Users\Administrator\Desktop\BWQS\BWQS\bin\System.Linq.Dynamic.BitWise.dll
+C:\Users\Administrator\Desktop\BWQS\BWQS\bin\System.Linq.Dynamic.dll
+C:\Users\Administrator\Desktop\BWQS\BWQS\obj\Debug\System.Linq.Dynamic.BitWise.Service.dll
+C:\Users\Administrator\Desktop\BWQS\BWQS\obj\Debug\System.Linq.Dynamic.BitWise.Service.pdb

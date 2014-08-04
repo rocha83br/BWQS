@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="True" Service="System.Linq.Dynamic.BitWise.Service.BWQS" CodeBehind="BWQS.svc.cs" %>
