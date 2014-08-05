@@ -15,7 +15,7 @@ namespace System.Linq.Dynamic.BitWise.Service
         void Initialize(string packedAssemblyBuffer, string className, string packedDataSource);
 
         [OperationContract]
-        string Query(string bwqExpr, string serialType);
+        string Query(string bwqExpr);
 
         [OperationContract]
         string Where(string bwqExpr, string serialType);

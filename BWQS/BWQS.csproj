@@ -54,6 +54,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libs\System.Linq.Dynamic.dll</HintPath>
     </Reference>
+    <Reference Include="System.Linq.Dynamic.BitWise, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\System.Linq.Dynamic.BitWise.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
@@ -81,7 +85,6 @@
     <Compile Include="Contracts\IBWQS.cs" />
     <Compile Include="Classes\BitWiseServiceBridge.cs" />
     <Compile Include="Helpers\Compressor.cs" />
-    <Compile Include="Helpers\Reflector.cs" />
     <Compile Include="Helpers\Serializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -95,12 +98,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\BWOQ\BWOQLib\BWOQLib.csproj">
-      <Project>{268c42de-879d-45e0-8157-4c38d5a029ce}</Project>
-      <Name>BWOQLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
