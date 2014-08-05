@@ -13,8 +13,8 @@ namespace System.Linq.Dynamic.BitWise.Service
     {
         #region Declarations
 
-        string initilizeMsg = "Initialize BWQS first.";
-        BitWiseServiceBridge internalEngine = null;
+        static string initilizeMsg = "Initialize BWQS first.";
+        static BitWiseServiceBridge internalEngine = null;
 
         #endregion
 
@@ -26,12 +26,12 @@ namespace System.Linq.Dynamic.BitWise.Service
             internalEngine.Initialize(packedAssemblyBuffer, className, packedDataSource);
         }
 
-        public string Query(string bwqExpr, string serialType)
+        public string Query(string bwqExpr)
         {
             if (internalEngine == null)
                 throw new TypeInitializationException(initilizeMsg, null);
 
-            return internalEngine.Query(bwqExpr, "True", serialType);
+            return internalEngine.Query(bwqExpr, "True", "json");
         }
 
         public string Where(string bwqExpr, string serialType)

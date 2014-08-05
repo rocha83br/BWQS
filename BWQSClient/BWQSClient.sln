@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWQS Client", "BWQS Client\BWQS Client.csproj", "{3177A2EC-B2C8-4603-B52A-C1DC156D1495}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWQSClient", "BWQSClient\BWQSClient.csproj", "{3177A2EC-B2C8-4603-B52A-C1DC156D1495}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

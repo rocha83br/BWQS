@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BWQS_Client.Properties {
+namespace System.Linq.Dynamic.BitWise.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
