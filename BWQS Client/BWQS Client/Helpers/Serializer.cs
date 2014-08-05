@@ -6,7 +6,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace System.Linq.Dynamic.BitWise.Helpers
+namespace BWQS_Client.Helpers
 {
     public class Serializer
     {
@@ -22,7 +22,7 @@ namespace System.Linq.Dynamic.BitWise.Helpers
             return Convert.FromBase64String(serialArray);
         }
 
-		public static string SerializeText(object sourceObject)
+        public static string SerializeText(object sourceObject)
         {
             MemoryStream memStream = new MemoryStream();
             XmlSerializer xmlSerializer = new XmlSerializer(sourceObject.GetType());
@@ -49,11 +49,14 @@ namespace System.Linq.Dynamic.BitWise.Helpers
 
             return result;
         }
-		
+
         public static string SerializeText(string source)
         {
-            byte[] textBuffer = source.ToCharArray()
-                                      .Select(chr => Convert.ToByte(chr)).ToArray();
+            byte[] textBuffer = new byte[source.Length];
+            
+            int cont = 0;
+            foreach (var txb in source.ToCharArray())
+                textBuffer[cont++] = Convert.ToByte(txb);
 
             return Convert.ToBase64String(textBuffer);
         }
@@ -61,8 +64,11 @@ namespace System.Linq.Dynamic.BitWise.Helpers
         public static string DeserializeText(string source)
         {
             byte[] sourceObj = Convert.FromBase64String(source);
+            char[] textBuffer = new char[sourceObj.Length];
 
-            char[] textBuffer = sourceObj.Select(bt => Convert.ToChar(bt)).ToArray();
+            int cont = 0;
+            foreach (var src in sourceObj)
+                textBuffer[cont++] = Convert.ToChar(src);
 
             return new string(textBuffer);
         }
@@ -86,7 +92,7 @@ namespace System.Linq.Dynamic.BitWise.Helpers
             return xmlReader.ReadContentAsObject();
         }
 
-		public static byte[] SerializeBinary(object sourceObject)
+        public static byte[] SerializeBinary(object sourceObject)
         {
             BinaryFormatter binSerializer = new BinaryFormatter();
             MemoryStream memStream = new MemoryStream();
@@ -113,7 +119,7 @@ namespace System.Linq.Dynamic.BitWise.Helpers
 
             return result;
         }
-		
+
         #endregion
 	}
 }

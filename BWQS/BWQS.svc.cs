@@ -13,8 +13,8 @@ namespace System.Linq.Dynamic.BitWise.Service
     {
         #region Declarations
 
-        string initilizeMsg = "Initialize BWQS first.";
-        BitWiseServiceBridge internalEngine = null;
+        static string initilizeMsg = "Initialize BWQS first.";
+        static BitWiseServiceBridge internalEngine = null;
 
         #endregion
 

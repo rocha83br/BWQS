@@ -1,0 +1,8 @@
+C:\Users\eqwix\Desktop\BWQS\BWQS\bin\System.Linq.Dynamic.BitWise.Service.dll
+C:\Users\eqwix\Desktop\BWQS\BWQS\bin\System.Linq.Dynamic.BitWise.Service.pdb
+C:\Users\eqwix\Desktop\BWQS\BWQS\bin\Newtonsoft.Json.dll
+C:\Users\eqwix\Desktop\BWQS\BWQS\bin\System.Linq.Dynamic.BitWise.dll
+C:\Users\eqwix\Desktop\BWQS\BWQS\bin\System.Linq.Dynamic.dll
+C:\Users\eqwix\Desktop\BWQS\BWQS\obj\Release\System.Linq.Dynamic.BitWise.Service.dll
+C:\Users\eqwix\Desktop\BWQS\BWQS\obj\Release\System.Linq.Dynamic.BitWise.Service.pdb
+C:\Users\eqwix\Desktop\BWQS\BWQS\obj\Release\BWQS.csprojResolveAssemblyReference.cache
