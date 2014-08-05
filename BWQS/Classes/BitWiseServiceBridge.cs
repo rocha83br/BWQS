@@ -5,6 +5,7 @@ using System.Text;
 using System.Reflection;
 using Newtonsoft.Json;
 using System.Linq.Dynamic.BitWise.Helpers;
+using System.Collections;
 
 namespace System.Linq.Dynamic.BitWise.Service
 {
@@ -13,10 +14,10 @@ namespace System.Linq.Dynamic.BitWise.Service
     {
         #region Declarations
 
-        string queryClass = string.Empty;
-        Type classType = null;
-        byte[] asmBuffer = null;
-        object dataSouce = null;
+        static string queryClass = string.Empty;
+        static Type classType = null;
+        static byte[] asmBuffer = null;
+        static object dataSouce = null;
         
         #endregion
 
@@ -41,12 +42,12 @@ namespace System.Linq.Dynamic.BitWise.Service
 
                 try
                 {
-                    classType = asmInstance.GetType(className);
+                    classType = getTypeCollection();
 
                     if (unpackedSource.Contains("xml"))
-                        dataSouce = Serializer.DeserializeXML(Compressor.UnZipText(unpackedSource), classType);
+                        dataSouce = Serializer.DeserializeXML(unpackedSource, classType);
                     else
-                        dataSouce = JsonConvert.DeserializeObject(Compressor.UnZipText(packedDataSource));
+                        dataSouce = JsonConvert.DeserializeObject(unpackedSource, classType);
                 }
                 catch (Exception ex)
                 {
@@ -143,7 +144,7 @@ namespace System.Linq.Dynamic.BitWise.Service
 
         #region Helper Methods
 
-            private object getEngineGenType()
+            private IBitWiseQuery getEngineGenType()
             {
                 var asmInstance = Assembly.Load(asmBuffer);
                 var engineType = typeof(BitWiseQuery<>);
@@ -151,7 +152,29 @@ namespace System.Linq.Dynamic.BitWise.Service
                 List<Type> typeTmpList = new List<Type>();
                 typeTmpList.Add(clsType);
                 var srcGenType = engineType.MakeGenericType(typeTmpList.ToArray());
-                return Activator.CreateInstance(srcGenType, dataSouce);
+                var objResult = Activator.CreateInstance(srcGenType, (IList)dataSouce, clsType);
+                var result = ((IBitWiseQuery)objResult);
+
+                return result;
+            }
+
+            private Type getClassType()
+            {
+                var asmInstance = Assembly.Load(asmBuffer);
+                var clsType = asmInstance.GetType(queryClass);
+
+                return clsType;
+            }
+
+            private Type getTypeCollection()
+            {
+                var asmInstance = Assembly.Load(asmBuffer);
+                var engineType = typeof(List<>);
+                var clsType = asmInstance.GetType(queryClass);
+                List<Type> typeTmpList = new List<Type>();
+                typeTmpList.Add(clsType);
+                
+                return engineType.MakeGenericType(typeTmpList.ToArray());
             }
 
             private object[] Query(string bwqExpr, string standAlone)
@@ -160,14 +183,14 @@ namespace System.Linq.Dynamic.BitWise.Service
 
                 if (!(string.IsNullOrEmpty(bwqExpr) && string.IsNullOrEmpty(standAlone)))
                 {
-                    var queryEngine = getEngineGenType() as BitWiseQuery<object>;
+                    var queryEngine = getEngineGenType();
 
                     var queryResult = queryEngine.Query(bwqExpr, true);
                     result = new object[queryResult.Count()];
 
                     int count = 0;
                     foreach (var qrr in queryResult)
-                        result[count++] = Convert.ChangeType(qrr, classType);
+                        result[count++] = qrr as object;
                 }
 
                 return result;
@@ -179,14 +202,14 @@ namespace System.Linq.Dynamic.BitWise.Service
 
                 if (!string.IsNullOrEmpty(bwqExpr))
                 {
-                    var queryEngine = getEngineGenType() as BitWiseQuery<object>;
+                    var queryEngine = getEngineGenType();
 
                     var queryResult = queryEngine.Where(bwqExpr);
                     result = new object[queryResult.Count()];
 
                     int count = 0;
                     foreach (var qrr in queryResult)
-                        result[count++] = Convert.ChangeType(qrr, classType);
+                        result[count++] = qrr as object;
                 }
 
                 return result;
@@ -198,14 +221,14 @@ namespace System.Linq.Dynamic.BitWise.Service
 
                 if (!string.IsNullOrEmpty(bwqExpr))
                 {
-                    var queryEngine = getEngineGenType() as BitWiseQuery<object>;
+                    var queryEngine = getEngineGenType();
 
                     var queryResult = queryEngine.OrderBy(bwqExpr);
                     result = new object[queryResult.Count()];
 
                     int count = 0;
                     foreach (var qrr in queryResult)
-                        result[count++] = Convert.ChangeType(qrr, classType);
+                        result[count++] = qrr as object;
                 }
 
                 return result;

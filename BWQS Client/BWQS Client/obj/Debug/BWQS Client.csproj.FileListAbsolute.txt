@@ -3,3 +3,27 @@ C:\Users\Administrator\Desktop\BWQS Client\BWQS Client\bin\Debug\BWQS Client.exe
 C:\Users\Administrator\Desktop\BWQS Client\BWQS Client\bin\Debug\BWQS Client.pdb
 C:\Users\Administrator\Desktop\BWQS Client\BWQS Client\obj\Debug\BWQS Client.exe
 C:\Users\Administrator\Desktop\BWQS Client\BWQS Client\obj\Debug\BWQS Client.pdb
+C:\Users\eqwix\Desktop\BWQS\BWQS Client\BWQS Client\bin\Debug\BWQS Client.exe.config
+C:\Users\eqwix\Desktop\BWQS\BWQS Client\BWQS Client\obj\Debug\BWQS Client.exe
+C:\Users\eqwix\Desktop\BWQS\BWQS Client\BWQS Client\obj\Debug\BWQS Client.pdb
+C:\Users\eqwix\Desktop\BWQS\BWQS Client\BWQS Client\bin\Debug\BWQS Client.exe
+C:\Users\eqwix\Desktop\BWQS\BWQS Client\BWQS Client\bin\Debug\BWQS Client.pdb
+C:\Users\eqwix\Desktop\BWQS\BWQS Client\BWQS Client\obj\Debug\BWQS Client.csprojResolveAssemblyReference.cache
+C:\Users\eqwix\Desktop\BWQS\BWQS Client\BWQS Client\bin\Debug\Newtonsoft.Json.Net20.dll
+C:\Users\RenatoRocha\Desktop\BWQS\BWQS Client\BWQS Client\bin\Debug\BWQS Client.exe.config
+C:\Users\RenatoRocha\Desktop\BWQS\BWQS Client\BWQS Client\obj\Debug\BWQS Client.exe
+C:\Users\RenatoRocha\Desktop\BWQS\BWQS Client\BWQS Client\obj\Debug\BWQS Client.pdb
+C:\Users\RenatoRocha\Desktop\BWQS\BWQS Client\BWQS Client\bin\Debug\BWQS Client.exe
+C:\Users\RenatoRocha\Desktop\BWQS\BWQS Client\BWQS Client\bin\Debug\BWQS Client.pdb
+C:\Users\RenatoRocha\Desktop\BWQS\BWQS Client\BWQS Client\bin\Debug\Newtonsoft.Json.Net20.dll
+C:\Users\RenatoRocha\Desktop\BWQS\BWQS Client\BWQS Client\obj\Debug\BWQS Client.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\BWQS\BWQS Client\BWQS Client\bin\Debug\BWQS Client.exe.config
+C:\Users\Administrator\Desktop\BWQS\BWQS Client\BWQS Client\obj\Debug\BWQS Client.exe
+C:\Users\Administrator\Desktop\BWQS\BWQS Client\BWQS Client\obj\Debug\BWQS Client.pdb
+C:\Users\Administrator\Desktop\BWQS\BWQS Client\BWQS Client\bin\Debug\BWQS Client.exe
+C:\Users\Administrator\Desktop\BWQS\BWQS Client\BWQS Client\bin\Debug\BWQS Client.pdb
+C:\Users\Administrator\Desktop\BWQS\BWQS Client\BWQS Client\bin\Debug\Newtonsoft.Json.Net20.dll
+C:\Users\Administrator\Desktop\BWQS\BWQS Client\BWQS Client\obj\Debug\BWQS Client.csprojResolveAssemblyReference.cache
+D:\BWQS\BWQS Client\BWQS Client\bin\Debug\BWQS Client.exe.config
+D:\BWQS\BWQS Client\BWQS Client\obj\Debug\BWQS Client.exe
+D:\BWQS\BWQS Client\BWQS Client\obj\Debug\BWQS Client.pdb
