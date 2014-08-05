@@ -1,0 +1,5 @@
+C:\Users\Administrator\Desktop\BWQS Client\BWQS Client\bin\Debug\BWQS Client.exe.config
+C:\Users\Administrator\Desktop\BWQS Client\BWQS Client\bin\Debug\BWQS Client.exe
+C:\Users\Administrator\Desktop\BWQS Client\BWQS Client\bin\Debug\BWQS Client.pdb
+C:\Users\Administrator\Desktop\BWQS Client\BWQS Client\obj\Debug\BWQS Client.exe
+C:\Users\Administrator\Desktop\BWQS Client\BWQS Client\obj\Debug\BWQS Client.pdb

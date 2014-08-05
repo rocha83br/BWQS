@@ -5,7 +5,6 @@ using System.Text;
 using System.Reflection;
 using Newtonsoft.Json;
 using System.Linq.Dynamic.BitWise.Helpers;
-using System.Collections;
 
 namespace System.Linq.Dynamic.BitWise.Service
 {
@@ -14,11 +13,10 @@ namespace System.Linq.Dynamic.BitWise.Service
     {
         #region Declarations
 
-        static string queryClass = string.Empty;
-        static Type classType = null;
-        static Type itemType = null;
-        static byte[] asmBuffer = null;
-        static object dataSouce = null;
+        string queryClass = string.Empty;
+        Type classType = null;
+        byte[] asmBuffer = null;
+        object dataSouce = null;
         
         #endregion
 
@@ -43,12 +41,12 @@ namespace System.Linq.Dynamic.BitWise.Service
 
                 try
                 {
-                    classType = getTypeCollection();
+                    classType = asmInstance.GetType(className);
 
                     if (unpackedSource.Contains("xml"))
-                        dataSouce = Serializer.DeserializeXML(unpackedSource, classType);
+                        dataSouce = Serializer.DeserializeXML(Compressor.UnZipText(unpackedSource), classType);
                     else
-                        dataSouce = JsonConvert.DeserializeObject(unpackedSource, classType);
+                        dataSouce = JsonConvert.DeserializeObject(Compressor.UnZipText(packedDataSource));
                 }
                 catch (Exception ex)
                 {
@@ -66,6 +64,7 @@ namespace System.Linq.Dynamic.BitWise.Service
                     if (serialResult.Equals(bool.TrueString) || serialResult.Equals("1"))
                     {
                         var qryResult = Query(bwqExpr, bool.TrueString);
+                        dataSouce = qryResult;
 
                         if (serialType.ToLower().Equals("xml"))
                             result = Serializer.SerializeXML(qryResult);
@@ -144,7 +143,7 @@ namespace System.Linq.Dynamic.BitWise.Service
 
         #region Helper Methods
 
-            private IBitWiseQuery getEngineGenType()
+            private object getEngineGenType()
             {
                 var asmInstance = Assembly.Load(asmBuffer);
                 var engineType = typeof(BitWiseQuery<>);
@@ -152,101 +151,80 @@ namespace System.Linq.Dynamic.BitWise.Service
                 List<Type> typeTmpList = new List<Type>();
                 typeTmpList.Add(clsType);
                 var srcGenType = engineType.MakeGenericType(typeTmpList.ToArray());
-                var objResult = Activator.CreateInstance(srcGenType, (IList)dataSouce, clsType);
-                var result = ((IBitWiseQuery)objResult);
-
-                return result;
+                return Activator.CreateInstance(srcGenType, dataSouce);
             }
 
-            private Type getTypeCollection()
+            private object[] Query(string bwqExpr, string standAlone)
             {
-                var asmInstance = Assembly.Load(asmBuffer);
-                var engineType = typeof(List<>);
-                itemType = asmInstance.GetType(queryClass);
-                List<Type> typeTmpList = new List<Type>();
-                typeTmpList.Add(itemType);
-                
-                return engineType.MakeGenericType(typeTmpList.ToArray());
-            }
-
-            private IList Query(string bwqExpr, string standAlone)
-            {
-                IList result = new List<object>();
+                object[] result = null;
 
                 if (!(string.IsNullOrEmpty(bwqExpr) && string.IsNullOrEmpty(standAlone)))
                 {
-                    var queryEngine = getEngineGenType();
+                    var queryEngine = getEngineGenType() as BitWiseQuery<object>;
 
                     var queryResult = queryEngine.Query(bwqExpr, true);
+                    result = new object[queryResult.Count()];
 
-                    foreach (var res in queryResult)
-                        result.Add(res);
+                    int count = 0;
+                    foreach (var qrr in queryResult)
+                        result[count++] = Convert.ChangeType(qrr, classType);
                 }
 
                 return result;
             }
 
-            private IList Where(string bwqExpr)
+            private object[] Where(string bwqExpr)
             {
-                IList result = (IList)Activator.CreateInstance(classType);
+                object[] result = null;
 
                 if (!string.IsNullOrEmpty(bwqExpr))
                 {
-                    var queryEngine = getEngineGenType();
+                    var queryEngine = getEngineGenType() as BitWiseQuery<object>;
 
                     var queryResult = queryEngine.Where(bwqExpr);
+                    result = new object[queryResult.Count()];
 
-                    foreach (var res in queryResult)
-                    {
-                        var newItem = Activator.CreateInstance(itemType);
-                        Reflector.CloneObjectData(res, newItem);
-                        
-                        result.Add(newItem);
-                    }
+                    int count = 0;
+                    foreach (var qrr in queryResult)
+                        result[count++] = Convert.ChangeType(qrr, classType);
                 }
 
                 return result;
             }
 
-            private IList OrderBy(string bwqExpr)
+            private object[] OrderBy(string bwqExpr)
             {
-                IList result = (IList)Activator.CreateInstance(classType);
+                object[] result = null;
 
                 if (!string.IsNullOrEmpty(bwqExpr))
                 {
-                    var queryEngine = getEngineGenType();
+                    var queryEngine = getEngineGenType() as BitWiseQuery<object>;
 
                     var queryResult = queryEngine.OrderBy(bwqExpr);
+                    result = new object[queryResult.Count()];
 
-                    foreach (var res in queryResult)
-                    {
-                        var newItem = Activator.CreateInstance(itemType);
-                        Reflector.CloneObjectData(res, newItem);
-
-                        result.Add(newItem);
-                    }
+                    int count = 0;
+                    foreach (var qrr in queryResult)
+                        result[count++] = Convert.ChangeType(qrr, classType);
                 }
 
                 return result;
             }
 
-            private IList OrderByDescending(string bwqExpr)
+            private object[] OrderByDescending(string bwqExpr)
             {
-                IList result = (IList)Activator.CreateInstance(classType);
+                object[] result = null;
 
                 if (!string.IsNullOrEmpty(bwqExpr))
                 {
-                    var queryEngine = getEngineGenType();
+                    var queryEngine = getEngineGenType() as BitWiseQuery<object>;
 
-                    //var queryResult = queryEngine.OrderByDescending(bwqExpr);
+                    var queryResult = queryEngine.OrderByDescending(bwqExpr);
+                    result = new object[queryResult.Count()];
 
-                    //foreach (var res in queryResult)
-                    //{
-                    //    var newItem = Activator.CreateInstance(itemType);
-                    //    Reflector.CloneObjectData(res, newItem);
-
-                    //    result.Add(newItem);
-                    //}
+                    int count = 0;
+                    foreach (var qrr in queryResult)
+                        result[count++] = Convert.ChangeType(qrr, classType);
                 }
 
                 return result;

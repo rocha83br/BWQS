@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace System.Linq.Dynamic.BitWise.BWQS {
+namespace BWQS_Client.BWQS {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -43,7 +43,7 @@ namespace System.Linq.Dynamic.BitWise.BWQS {
         
         /// <remarks/>
         public BWQS() {
-            this.Url = global::System.Linq.Dynamic.BitWise.Properties.Settings.Default.BWQS_Client_System_Linq_Dynamic_BitWise_Service_BWQS;
+            this.Url = global::BWQS_Client.Properties.Settings.Default.BWQS_Client_System_Linq_Dynamic_BitWise_Service_BWQS;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
