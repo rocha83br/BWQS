@@ -41,14 +41,9 @@ namespace System.Linq.Dynamic.BitWise.Helpers
 
         public static string ZipText(string rawText)
         {
-            var cont = 0;
-            byte[] rawBinary = new byte[rawText.Length];
-            byte[] compressedBinary = null;
+            byte[] rawBinary = ASCIIEncoding.ASCII.GetBytes(rawText);
 
-            foreach (var chr in rawText.ToCharArray())
-                rawBinary[cont++] = Convert.ToByte(chr);
-
-            compressedBinary = ZipBinary(rawBinary);
+            byte[] compressedBinary = ZipBinary(rawBinary);
 
             return Convert.ToBase64String(compressedBinary);
         }

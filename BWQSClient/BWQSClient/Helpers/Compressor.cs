@@ -27,7 +27,7 @@ namespace BWQS_Client.Helpers
 
         public static byte[] UnZipBinary(byte[] compressedSource)
         {
-            byte[] unpackedContent = new byte[compressedSource.Length * 10];
+            byte[] unpackedContent = new byte[compressedSource.Length * 15];
             memSource = new MemoryStream(compressedSource);
 
             gzipStream = new GZipStream(memSource, CompressionMode.Decompress);
@@ -41,14 +41,9 @@ namespace BWQS_Client.Helpers
 
         public static string ZipText(string rawText)
         {
-            var cont = 0;
-            byte[] rawBinary = new byte[rawText.Length];
-            byte[] compressedBinary = null;
+            byte[] rawBinary = ASCIIEncoding.ASCII.GetBytes(rawText);
 
-            foreach (var chr in rawText.ToCharArray())
-                rawBinary[cont++] = Convert.ToByte(chr);
-
-            compressedBinary = ZipBinary(rawBinary);
+            byte[] compressedBinary = ZipBinary(rawBinary);
 
             return Convert.ToBase64String(compressedBinary);
         }

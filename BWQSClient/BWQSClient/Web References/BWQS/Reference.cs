@@ -263,26 +263,26 @@ namespace System.Linq.Dynamic.BitWise.BWQS {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IBWQS/GroupBy", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string GroupBy([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string grpBWQExpr, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string bwqExpr) {
+        public string GroupBy([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string grpExpr, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string _byExpr) {
             object[] results = this.Invoke("GroupBy", new object[] {
-                        grpBWQExpr,
-                        bwqExpr});
+                        grpExpr,
+                        _byExpr});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void GroupByAsync(string grpBWQExpr, string bwqExpr) {
-            this.GroupByAsync(grpBWQExpr, bwqExpr, null);
+        public void GroupByAsync(string grpExpr, string _byExpr) {
+            this.GroupByAsync(grpExpr, _byExpr, null);
         }
         
         /// <remarks/>
-        public void GroupByAsync(string grpBWQExpr, string bwqExpr, object userState) {
+        public void GroupByAsync(string grpExpr, string _byExpr, object userState) {
             if ((this.GroupByOperationCompleted == null)) {
                 this.GroupByOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGroupByOperationCompleted);
             }
             this.InvokeAsync("GroupBy", new object[] {
-                        grpBWQExpr,
-                        bwqExpr}, this.GroupByOperationCompleted, userState);
+                        grpExpr,
+                        _byExpr}, this.GroupByOperationCompleted, userState);
         }
         
         private void OnGroupByOperationCompleted(object arg) {

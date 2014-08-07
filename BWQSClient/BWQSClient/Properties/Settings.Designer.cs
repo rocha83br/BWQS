@@ -26,7 +26,7 @@ namespace System.Linq.Dynamic.BitWise.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:4165/BWQS.svc")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://pccs01-001-site1.myasp.net/BWQS.svc")]
         public string BWQS_Client_System_Linq_Dynamic_BitWise_Service_BWQS {
             get {
                 return ((string)(this["BWQS_Client_System_Linq_Dynamic_BitWise_Service_BWQS"]));

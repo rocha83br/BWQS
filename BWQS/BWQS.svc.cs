@@ -58,12 +58,12 @@ namespace System.Linq.Dynamic.BitWise.Service
             return internalEngine.OrderByDescending(bwqExpr, "True", serialType);
         }
 
-        public string GroupBy(string _byExpr, string grpExpr)
+        public string GroupBy(string grpExpr, string _byExpr)
         {
             if (internalEngine == null)
                 throw new TypeInitializationException(initilizeMsg, null);
 
-            return internalEngine.GroupBy(grpExpr, _byExpr, "True", "json");
+            return internalEngine.GroupBy(_byExpr, grpExpr, "True", "json");
         }
 
         public GroupResult GetGroupResult()

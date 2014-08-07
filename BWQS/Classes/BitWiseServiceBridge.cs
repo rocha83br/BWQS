@@ -71,6 +71,8 @@ namespace System.Linq.Dynamic.BitWise.Service
                             result = Serializer.SerializeXML(qryResult);
                         else
                             result = JsonConvert.SerializeObject(qryResult);
+
+                        result = Compressor.ZipText(result);
                     }
                 }
 
@@ -93,6 +95,8 @@ namespace System.Linq.Dynamic.BitWise.Service
                         else
                             result = JsonConvert.SerializeObject(qryResult);
                     }
+
+                    result = Compressor.ZipText(result);
                 }
 
                 return result;
@@ -113,6 +117,8 @@ namespace System.Linq.Dynamic.BitWise.Service
                             result = Serializer.SerializeXML(qryResult);
                         else
                             result = JsonConvert.SerializeObject(qryResult);
+
+                        result = Compressor.ZipText(result);
                     }
                 }
 
@@ -134,26 +140,30 @@ namespace System.Linq.Dynamic.BitWise.Service
                             result = Serializer.SerializeXML(qryResult);
                         else
                             result = JsonConvert.SerializeObject(qryResult);
+
+                        result = Compressor.ZipText(result);
                     }
                 }
 
                 return result;
             }
 
-            public string GroupBy(string grpBWQExpr, string bwqExpr, string serialResult, string serialType)
+            public string GroupBy(string grpExpr, string _byExpr, string serialResult, string serialType)
             {
                 var result = string.Empty;
 
-                if (!(string.IsNullOrEmpty(bwqExpr) && string.IsNullOrEmpty(serialResult) && string.IsNullOrEmpty(serialType)))
+                if (!(string.IsNullOrEmpty(grpExpr) && string.IsNullOrEmpty(_byExpr) && string.IsNullOrEmpty(serialResult) && string.IsNullOrEmpty(serialType)))
                 {
                     if (serialResult.Equals(bool.TrueString) || serialResult.Equals("1"))
                     {
-                        var qryResult = GroupBy(grpBWQExpr, bwqExpr);
+                        var qryResult = GroupBy(grpExpr, _byExpr);
 
                         if (serialType.ToLower().Equals("xml"))
                             result = Serializer.SerializeXML(qryResult);
                         else
                             result = JsonConvert.SerializeObject(qryResult);
+
+                        result = Compressor.ZipText(result);
                     }
                 }
 
@@ -272,7 +282,7 @@ namespace System.Linq.Dynamic.BitWise.Service
                 return result;
             }
 
-            private IList GroupBy(string _byExpr, string grpExpr)
+            private IList GroupBy(string grpExpr, string _byExpr)
             {
                 var result = new List<GroupResult>();
 
@@ -280,7 +290,7 @@ namespace System.Linq.Dynamic.BitWise.Service
                 {
                     var queryEngine = getEngineGenType();
 
-                    var qryResult = queryEngine.GroupBy(grpExpr, _byExpr) as IEnumerable<IGrouping<object, object>>;
+                    var qryResult = queryEngine.GroupBy(_byExpr, grpExpr) as IEnumerable<IGrouping<object, object>>;
 
                     foreach (var res in qryResult)
                     {

@@ -11,7 +11,11 @@ namespace System.Linq.Dynamic.BitWise
 {
     public static class BWQSClient
     {
-        public static BWQS.BWQS GetEngineInstance(object dataSource, Type sourceType, string serialType)
+        private static string internalSerialType;
+        private static BWQS.BWQS internalEngine;
+        private static string initilizeMsg = "Initialize Engine First.";
+
+        public static void InitializeEngine(object dataSource, Type sourceType, string serialType)
         {
             var bwqsInstance = new BWQS.BWQS();
             var asmBuffer = Compressor.ZipText(Serializer.SerializeArray(Reflector.GetAssemblyBuffer(sourceType)));
@@ -24,7 +28,13 @@ namespace System.Linq.Dynamic.BitWise
 
             bwqsInstance.Initialize(asmBuffer, sourceType.FullName, serialDataSource);
 
-            return bwqsInstance;
+            internalSerialType = serialType;
+            internalEngine = bwqsInstance;
+        }
+
+        public static void Close()
+        {
+            internalEngine.Dispose();
         }
 
         public static List<T> GetQueryResult<T>(string queryResult)
@@ -63,6 +73,46 @@ namespace System.Linq.Dynamic.BitWise
             }
 
             return rawResult;
+        }
+
+        public static string Query(string extExpr)
+        {
+            if (internalEngine == null)
+                throw new TypeInitializationException(initilizeMsg, null);
+
+            return Compressor.UnZipText(internalEngine.Query(extExpr));
+        }
+
+        public static string Where(string extExpr)
+        {
+            if (internalEngine == null)
+                throw new TypeInitializationException(initilizeMsg, null);
+
+            return  Compressor.UnZipText(internalEngine.Where(extExpr, internalSerialType));
+        }
+
+        public static string OrderBy(string extExpr)
+        {
+            if (internalEngine == null)
+                throw new TypeInitializationException(initilizeMsg, null);
+
+            return  Compressor.UnZipText(internalEngine.OrderBy(extExpr, internalSerialType));
+        }
+
+        public static string OrderByDescending(string extExpr)
+        {
+            if (internalEngine == null)
+                throw new TypeInitializationException(initilizeMsg, null);
+
+            return  Compressor.UnZipText(internalEngine.OrderByDescending(extExpr, internalSerialType));
+        }
+
+        public static string GroupBy(string grpExpr, string _byExpr)
+        {
+            if (internalEngine == null)
+                throw new TypeInitializationException(initilizeMsg, null);
+
+            return  Compressor.UnZipText(internalEngine.GroupBy(grpExpr, _byExpr));
         }
     }
 }
