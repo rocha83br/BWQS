@@ -1,0 +1,8 @@
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQS\bin\System.Linq.Dynamic.BitWise.Service.dll
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQS\bin\System.Linq.Dynamic.BitWise.Service.pdb
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQS\bin\Newtonsoft.Json.dll
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQS\bin\System.Linq.Dynamic.BitWise.dll
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQS\bin\System.Linq.Dynamic.dll
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQS\obj\Debug\System.Linq.Dynamic.BitWise.Service.dll
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQS\obj\Debug\System.Linq.Dynamic.BitWise.Service.pdb
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQS\obj\Debug\BWQS.csprojResolveAssemblyReference.cache

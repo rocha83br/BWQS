@@ -24,8 +24,23 @@ namespace BWQS_Client.Helpers
         {
             foreach (var prp in getObjectProps(source))
                 if (prp.CanWrite)
-					getObjectProps(destination, prp.Name)[0].SetValue(destination,
-															prp.GetValue(source, null), null);
+                    if (getObjectProps(destination, prp.Name).Length > 0)
+                    {
+                        if (!prp.PropertyType.Namespace.Equals(source.GetType().Namespace))
+                            getObjectProps(destination, prp.Name)[0].SetValue(destination,
+                                                        prp.GetValue(source, null), null);
+                        else
+                            CloneObjectData(prp.GetValue(source, null),
+                                            getObjectProps(destination, prp.Name)[0]
+                                            .GetValue(destination, null));
+                    }
+                    else
+                    {
+                        var sourceTypeName = source.GetType().Name;
+                        if (sourceTypeName.StartsWith("DynamicClass") || sourceTypeName.Equals("JObject"))
+                            foreach (var child in getObjectChilds(destination))
+                                CloneObjectData(source, child);
+                    }
         }
 
         #endregion
@@ -73,10 +88,31 @@ namespace BWQS_Client.Helpers
                 foreach(var flt in filter)
                     strFilters += string.Concat(flt.ToString(), ", ");
                 
-                throw new Exception(string.Concat("Attribute(s) ", 
-                                    strFilters.Substring(0, strFilters.Length - 2), 
-                                    " not found in type ", source.GetType().Name));
+                //throw new Exception(string.Concat("Attribute(s) ", 
+                //                    strFilters.Substring(0, strFilters.Length - 2), 
+                //                    " not found in type ", source.GetType().Name));
             }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// Obtem a relação de instâncias das classes filho de um objeto
+        /// </summary>
+        /// <author>Renato Rocha, 2014</author>
+        /// <param name="source">Instância do objeto</param>
+        /// <returns>object</returns>
+        internal static object[] getObjectChilds(object destination)
+        {
+            var result = new List<object>();
+            List<PropertyInfo> childProps = new List<PropertyInfo>();
+
+            foreach (var prp in destination.GetType().GetProperties())
+                if (prp.PropertyType.Namespace.Equals(destination.GetType().Namespace))
+                    childProps.Add(prp);
+
+            foreach (var child in childProps)
+                result.Add(child.GetValue(destination, null));
 
             return result.ToArray();
         }

@@ -79,6 +79,12 @@
     <None Include="Web References\BWQS\BWQS0.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Web References\BWQS\BWQS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\BWQS\GroupResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\BWQS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

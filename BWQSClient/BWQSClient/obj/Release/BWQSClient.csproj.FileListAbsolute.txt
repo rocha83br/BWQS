@@ -1,0 +1,8 @@
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQSClient\BWQSClient\bin\Release\BWQSClient.dll.config
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQSClient\BWQSClient\bin\Release\BWQSClient.dll
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQSClient\BWQSClient\bin\Release\BWQSClient.XmlSerializers.dll
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQSClient\BWQSClient\bin\Release\BWQSClient.pdb
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQSClient\BWQSClient\bin\Release\Newtonsoft.Json.Net20.dll
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQSClient\BWQSClient\obj\Release\BWQSClient.dll
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQSClient\BWQSClient\obj\Release\BWQSClient.pdb
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQSClient\BWQSClient\obj\Release\BWQSClient.XmlSerializers.dll

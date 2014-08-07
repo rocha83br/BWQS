@@ -139,6 +139,26 @@ namespace System.Linq.Dynamic.BitWise.Service
 
                 return result;
             }
+
+            public string GroupBy(string grpBWQExpr, string bwqExpr, string serialResult, string serialType)
+            {
+                var result = string.Empty;
+
+                if (!(string.IsNullOrEmpty(bwqExpr) && string.IsNullOrEmpty(serialResult) && string.IsNullOrEmpty(serialType)))
+                {
+                    if (serialResult.Equals(bool.TrueString) || serialResult.Equals("1"))
+                    {
+                        var qryResult = GroupBy(grpBWQExpr, bwqExpr);
+
+                        if (serialType.ToLower().Equals("xml"))
+                            result = Serializer.SerializeXML(qryResult);
+                        else
+                            result = JsonConvert.SerializeObject(qryResult);
+                    }
+                }
+
+                return result;
+            }
         
         #endregion
 
@@ -238,15 +258,44 @@ namespace System.Linq.Dynamic.BitWise.Service
                 {
                     var queryEngine = getEngineGenType();
 
-                    //var queryResult = queryEngine.OrderByDescending(bwqExpr);
+                    var queryResult = queryEngine.OrderByDescending(bwqExpr);
 
-                    //foreach (var res in queryResult)
-                    //{
-                    //    var newItem = Activator.CreateInstance(itemType);
-                    //    Reflector.CloneObjectData(res, newItem);
+                    foreach (var res in queryResult)
+                    {
+                        var newItem = Activator.CreateInstance(itemType);
+                        Reflector.CloneObjectData(res, newItem);
 
-                    //    result.Add(newItem);
-                    //}
+                        result.Add(newItem);
+                    }
+                }
+
+                return result;
+            }
+
+            private IList GroupBy(string _byExpr, string grpExpr)
+            {
+                var result = new List<GroupResult>();
+
+                if (!string.IsNullOrEmpty(grpExpr) && !string.IsNullOrEmpty(_byExpr))
+                {
+                    var queryEngine = getEngineGenType();
+
+                    var qryResult = queryEngine.GroupBy(grpExpr, _byExpr) as IEnumerable<IGrouping<object, object>>;
+
+                    foreach (var res in qryResult)
+                    {
+                        var itemResult = new GroupResult() { Key = res.Key };
+                        var valueList = (IList)Activator.CreateInstance(classType);
+                        
+                        foreach(var resVal in res)
+                        {
+                            var valItem = Activator.CreateInstance(itemType);
+                            Reflector.CloneObjectData(resVal, valItem);
+                            valueList.Add(valItem);
+                        }
+
+                        result.Add(new GroupResult() { Key = res.Key, Values = valueList });
+                    }
                 }
 
                 return result;

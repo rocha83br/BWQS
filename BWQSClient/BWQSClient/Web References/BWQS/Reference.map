@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost:4165/BWQS.svc?xsd=xsd2" filename="BWQS.xsd" />
     <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://localhost:4165/BWQS.svc?wsdl" filename="BWQS.wsdl" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost:4165/BWQS.svc?xsd=xsd0" filename="BWQS.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost:4165/BWQS.svc?xsd=xsd0" filename="BWQS0.xsd" />
     <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://localhost:4165/BWQS.svc?disco" filename="BWQS.disco" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost:4165/BWQS.svc?xsd=xsd1" filename="BWQS0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost:4165/BWQS.svc?xsd=xsd1" filename="BWQS1.xsd" />
   </Results>
 </DiscoveryClientResultsFile>

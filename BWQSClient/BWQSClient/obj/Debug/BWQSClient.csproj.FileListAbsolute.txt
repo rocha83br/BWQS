@@ -1,0 +1,6 @@
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQSClient\BWQSClient\bin\Debug\BWQSClient.dll.config
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQSClient\BWQSClient\bin\Debug\BWQSClient.dll
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQSClient\BWQSClient\bin\Debug\BWQSClient.pdb
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQSClient\BWQSClient\bin\Debug\Newtonsoft.Json.Net20.dll
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQSClient\BWQSClient\obj\Debug\BWQSClient.dll
+C:\Users\Administrator\Documents\GitHub\BWQS\BWQSClient\BWQSClient\obj\Debug\BWQSClient.pdb

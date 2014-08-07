@@ -25,5 +25,11 @@ namespace System.Linq.Dynamic.BitWise.Service
 
         [OperationContract]
         string OrderByDescending(string bwqExpr, string serialType);
+
+        [OperationContract]
+        string GroupBy(string grpBWQExpr, string bwqExpr);
+
+        [OperationContract]
+        GroupResult GetGroupResult();
     }
 }

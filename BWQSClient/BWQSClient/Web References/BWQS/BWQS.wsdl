@@ -4,6 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:4165/BWQS.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:4165/BWQS.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:4165/BWQS.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.Linq.Dynamic.BitWise.Service" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IBWQS_Initialize_InputMessage">
@@ -36,6 +37,18 @@
   <wsdl:message name="IBWQS_OrderByDescending_OutputMessage">
     <wsdl:part name="parameters" element="tns:OrderByDescendingResponse" />
   </wsdl:message>
+  <wsdl:message name="IBWQS_GroupBy_InputMessage">
+    <wsdl:part name="parameters" element="tns:GroupBy" />
+  </wsdl:message>
+  <wsdl:message name="IBWQS_GroupBy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GroupByResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBWQS_GetGroupResult_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupResult" />
+  </wsdl:message>
+  <wsdl:message name="IBWQS_GetGroupResult_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupResultResponse" />
+  </wsdl:message>
   <wsdl:portType name="IBWQS">
     <wsdl:operation name="Initialize">
       <wsdl:input wsaw:Action="http://tempuri.org/IBWQS/Initialize" message="tns:IBWQS_Initialize_InputMessage" />
@@ -56,6 +69,14 @@
     <wsdl:operation name="OrderByDescending">
       <wsdl:input wsaw:Action="http://tempuri.org/IBWQS/OrderByDescending" message="tns:IBWQS_OrderByDescending_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBWQS/OrderByDescendingResponse" message="tns:IBWQS_OrderByDescending_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GroupBy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBWQS/GroupBy" message="tns:IBWQS_GroupBy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBWQS/GroupByResponse" message="tns:IBWQS_GroupBy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupResult">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBWQS/GetGroupResult" message="tns:IBWQS_GetGroupResult_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBWQS/GetGroupResultResponse" message="tns:IBWQS_GetGroupResult_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IBWQS" type="tns:IBWQS">
@@ -98,6 +119,24 @@
     </wsdl:operation>
     <wsdl:operation name="OrderByDescending">
       <soap:operation soapAction="http://tempuri.org/IBWQS/OrderByDescending" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GroupBy">
+      <soap:operation soapAction="http://tempuri.org/IBWQS/GroupBy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupResult">
+      <soap:operation soapAction="http://tempuri.org/IBWQS/GetGroupResult" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

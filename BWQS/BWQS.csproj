@@ -82,6 +82,7 @@
     <Compile Include="BWQS.svc.cs">
       <DependentUpon>BWQS.svc</DependentUpon>
     </Compile>
+    <Compile Include="Classes\GroupResult.cs" />
     <Compile Include="Contracts\IBWQS.cs" />
     <Compile Include="Classes\BitWiseServiceBridge.cs" />
     <Compile Include="Helpers\Compressor.cs" />
@@ -92,6 +93,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\LocalDeploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

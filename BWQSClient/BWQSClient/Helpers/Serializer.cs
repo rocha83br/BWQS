@@ -85,11 +85,7 @@ namespace BWQS_Client.Helpers
 
         public static object DeserializeXML(string serialObject, Type objType)
         {
-            XmlReader xmlReader = XmlReader.Create(serialObject);
-
-            new XmlSerializer(objType).Deserialize(xmlReader);
-
-            return xmlReader.ReadContentAsObject();
+            return new XmlSerializer(objType).Deserialize(new StringReader(serialObject));
         }
 
         public static byte[] SerializeBinary(object sourceObject)

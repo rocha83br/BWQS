@@ -39,6 +39,10 @@ namespace System.Linq.Dynamic.BitWise.BWQS {
         
         private System.Threading.SendOrPostCallback OrderByDescendingOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GroupByOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetGroupResultOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -93,6 +97,12 @@ namespace System.Linq.Dynamic.BitWise.BWQS {
         public event OrderByDescendingCompletedEventHandler OrderByDescendingCompleted;
         
         /// <remarks/>
+        public event GroupByCompletedEventHandler GroupByCompleted;
+        
+        /// <remarks/>
+        public event GetGroupResultCompletedEventHandler GetGroupResultCompleted;
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IBWQS/Initialize", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void Initialize([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string packedAssemblyBuffer, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string className, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string packedDataSource) {
             this.Invoke("Initialize", new object[] {
@@ -127,26 +137,24 @@ namespace System.Linq.Dynamic.BitWise.BWQS {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IBWQS/Query", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Query([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string bwqExpr, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string serialType) {
+        public string Query([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string bwqExpr) {
             object[] results = this.Invoke("Query", new object[] {
-                        bwqExpr,
-                        serialType});
+                        bwqExpr});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void QueryAsync(string bwqExpr, string serialType) {
-            this.QueryAsync(bwqExpr, serialType, null);
+        public void QueryAsync(string bwqExpr) {
+            this.QueryAsync(bwqExpr, null);
         }
         
         /// <remarks/>
-        public void QueryAsync(string bwqExpr, string serialType, object userState) {
+        public void QueryAsync(string bwqExpr, object userState) {
             if ((this.QueryOperationCompleted == null)) {
                 this.QueryOperationCompleted = new System.Threading.SendOrPostCallback(this.OnQueryOperationCompleted);
             }
             this.InvokeAsync("Query", new object[] {
-                        bwqExpr,
-                        serialType}, this.QueryOperationCompleted, userState);
+                        bwqExpr}, this.QueryOperationCompleted, userState);
         }
         
         private void OnQueryOperationCompleted(object arg) {
@@ -253,6 +261,66 @@ namespace System.Linq.Dynamic.BitWise.BWQS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IBWQS/GroupBy", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string GroupBy([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string grpBWQExpr, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string bwqExpr) {
+            object[] results = this.Invoke("GroupBy", new object[] {
+                        grpBWQExpr,
+                        bwqExpr});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GroupByAsync(string grpBWQExpr, string bwqExpr) {
+            this.GroupByAsync(grpBWQExpr, bwqExpr, null);
+        }
+        
+        /// <remarks/>
+        public void GroupByAsync(string grpBWQExpr, string bwqExpr, object userState) {
+            if ((this.GroupByOperationCompleted == null)) {
+                this.GroupByOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGroupByOperationCompleted);
+            }
+            this.InvokeAsync("GroupBy", new object[] {
+                        grpBWQExpr,
+                        bwqExpr}, this.GroupByOperationCompleted, userState);
+        }
+        
+        private void OnGroupByOperationCompleted(object arg) {
+            if ((this.GroupByCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GroupByCompleted(this, new GroupByCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IBWQS/GetGroupResult", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public GroupResult GetGroupResult() {
+            object[] results = this.Invoke("GetGroupResult", new object[0]);
+            return ((GroupResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetGroupResultAsync() {
+            this.GetGroupResultAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetGroupResultAsync(object userState) {
+            if ((this.GetGroupResultOperationCompleted == null)) {
+                this.GetGroupResultOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetGroupResultOperationCompleted);
+            }
+            this.InvokeAsync("GetGroupResult", new object[0], this.GetGroupResultOperationCompleted, userState);
+        }
+        
+        private void OnGetGroupResultOperationCompleted(object arg) {
+            if ((this.GetGroupResultCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetGroupResultCompleted(this, new GetGroupResultCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -268,6 +336,41 @@ namespace System.Linq.Dynamic.BitWise.BWQS {
                 return true;
             }
             return false;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/System.Linq.Dynamic.BitWise.Service")]
+    public partial class GroupResult {
+        
+        private object keyField;
+        
+        private object valuesField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public object Key {
+            get {
+                return this.keyField;
+            }
+            set {
+                this.keyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public object Values {
+            get {
+                return this.valuesField;
+            }
+            set {
+                this.valuesField = value;
+            }
         }
     }
     
@@ -375,6 +478,58 @@ namespace System.Linq.Dynamic.BitWise.BWQS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void GroupByCompletedEventHandler(object sender, GroupByCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GroupByCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GroupByCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void GetGroupResultCompletedEventHandler(object sender, GetGroupResultCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetGroupResultCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetGroupResultCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public GroupResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((GroupResult)(this.results[0]));
             }
         }
     }
