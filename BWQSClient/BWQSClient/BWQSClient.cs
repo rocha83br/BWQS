@@ -49,30 +49,35 @@ namespace System.Linq.Dynamic.BitWise
             return typedResult;
         }
 
-        public static List<GroupResult> GetGroupResult<T>(string queryResult)
+        public static IList GetGroupResult<T>(string queryResult)
         {
-            var rawResult = JsonConvert.DeserializeObject<List<GroupResult>>(queryResult);
+            var grpResult = JsonConvert.DeserializeObject<List<GroupResult>>(queryResult);
 
-            foreach (var rawItem in rawResult)
+            if (grpResult[0].Values != null)
             {
-                var jsonItem = JsonConvert.SerializeObject(rawItem.Key);
-                rawItem.Key = JsonConvert.DeserializeObject<T>(jsonItem);
-
-                jsonItem = JsonConvert.SerializeObject(rawItem.Values);
-                var jsonVals = JsonConvert.DeserializeObject<List<T>>(jsonItem);
-
-                List<object> resValues = new List<object>();
-                foreach(var item in (IList)jsonVals)
+                foreach (var rawItem in grpResult)
                 {
-                    var resVal = Activator.CreateInstance(typeof(T));
-                    Reflector.CloneObjectData(item, resVal);
-                    resValues.Add(resVal);
-                }
-                    
-                rawItem.Values = resValues;
-            }
+                    var jsonItem = JsonConvert.SerializeObject(rawItem.Key);
+                    rawItem.Key = JsonConvert.DeserializeObject<T>(jsonItem);
 
-            return rawResult;
+                    jsonItem = JsonConvert.SerializeObject(rawItem.Values);
+                    var jsonVals = JsonConvert.DeserializeObject<List<T>>(jsonItem);
+
+                    List<object> resValues = new List<object>();
+                    foreach (var item in (IList)jsonVals)
+                    {
+                        var resVal = Activator.CreateInstance(typeof(T));
+                        Reflector.CloneObjectData(item, resVal);
+                        resValues.Add(resVal);
+                    }
+
+                    rawItem.Values = resValues;
+                }
+
+                return grpResult;
+            }
+            else
+                return  JsonConvert.DeserializeObject<IList>(queryResult);
         }
 
         public static string Query(string extExpr)

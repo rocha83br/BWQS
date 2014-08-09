@@ -27,7 +27,7 @@ namespace BWQS_Client.Helpers
 
         public static byte[] UnZipBinary(byte[] compressedSource)
         {
-            byte[] unpackedContent = new byte[compressedSource.Length * 15];
+            byte[] unpackedContent = new byte[compressedSource.Length * 20];
             memSource = new MemoryStream(compressedSource);
 
             gzipStream = new GZipStream(memSource, CompressionMode.Decompress);

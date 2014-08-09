@@ -41,12 +41,6 @@ namespace System.Linq.Dynamic.BitWise.Service
 
             var result = internalEngine.Where(bwqExpr, "True", serialType);
 
-            try {
-                QueryRegister.RegisterQueryLog(bwqExpr, result.Count().ToString());
-            } catch(Exception ex)
-            {
-            }
-
             return result;
         }
 

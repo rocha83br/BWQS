@@ -96,6 +96,14 @@ namespace System.Linq.Dynamic.BitWise.Service
                             result = JsonConvert.SerializeObject(qryResult);
                     }
 
+                    try
+                    {
+                        QueryRegister.RegisterQueryLog(queryClass, bwqExpr, "filter", result.Count().ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+
                     result = Compressor.ZipText(result);
                 }
 
@@ -284,27 +292,42 @@ namespace System.Linq.Dynamic.BitWise.Service
 
             private IList GroupBy(string grpExpr, string _byExpr)
             {
-                var result = new List<GroupResult>();
+                IList result = null;
 
                 if (!string.IsNullOrEmpty(grpExpr) && !string.IsNullOrEmpty(_byExpr))
                 {
                     var queryEngine = getEngineGenType();
 
-                    var qryResult = queryEngine.GroupBy(_byExpr, grpExpr) as IEnumerable<IGrouping<object, object>>;
+                    var rawResult = queryEngine.GroupBy(_byExpr, grpExpr);
 
-                    foreach (var res in qryResult)
+                    var qryResult = rawResult as IEnumerable<IGrouping<object, object>>;
+
+                    if (qryResult != null)
                     {
-                        var itemResult = new GroupResult() { Key = res.Key };
-                        var valueList = (IList)Activator.CreateInstance(classType);
-                        
-                        foreach(var resVal in res)
+                        result = new List<GroupResult>();
+                        foreach (var res in qryResult)
                         {
-                            var valItem = Activator.CreateInstance(itemType);
-                            Reflector.CloneObjectData(resVal, valItem);
-                            valueList.Add(valItem);
-                        }
+                            var itemResult = new GroupResult() { Key = res.Key };
+                            var valueList = (IList)Activator.CreateInstance(classType);
 
-                        result.Add(new GroupResult() { Key = res.Key, Values = valueList });
+                            foreach (var resVal in res)
+                            {
+                                var valItem = Activator.CreateInstance(itemType);
+                                Reflector.CloneObjectData(resVal, valItem);
+                                valueList.Add(valItem);
+                            }
+
+                            result.Add(new GroupResult() { Key = res.Key, Values = valueList });
+                        }
+                    }
+                    else
+                    {
+                        var rawList = rawResult as IEnumerable;
+                        var rawResultList = new List<object>();
+                        foreach (var rwi in rawList)
+                            rawResultList.Add(rwi);
+
+                        return rawResultList;
                     }
                 }
 
