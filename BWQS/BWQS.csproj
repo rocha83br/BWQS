@@ -16,7 +16,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -83,6 +83,7 @@
       <DependentUpon>BWQS.svc</DependentUpon>
     </Compile>
     <Compile Include="Classes\GroupResult.cs" />
+    <Compile Include="Classes\QueryRegister.cs" />
     <Compile Include="Contracts\IBWQS.cs" />
     <Compile Include="Classes\BitWiseServiceBridge.cs" />
     <Compile Include="Helpers\Compressor.cs" />

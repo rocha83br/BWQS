@@ -39,7 +39,15 @@ namespace System.Linq.Dynamic.BitWise.Service
             if (internalEngine == null)
                 throw new TypeInitializationException(initilizeMsg, null);
 
-            return internalEngine.Where(bwqExpr, "True", serialType);
+            var result = internalEngine.Where(bwqExpr, "True", serialType);
+
+            try {
+                QueryRegister.RegisterQueryLog(bwqExpr, result.Count().ToString());
+            } catch(Exception ex)
+            {
+            }
+
+            return result;
         }
 
         public string OrderBy(string bwqExpr, string serialType)
