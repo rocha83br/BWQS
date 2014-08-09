@@ -201,7 +201,7 @@ namespace System.Linq.Dynamic.BitWise.Service
 
                 try
                 {
-                    string grpConcatExpr = string.Concat(grpExpr, " by ", _byExpr);
+                    string grpConcatExpr = string.Concat(_byExpr, "][", grpExpr);
                     QueryRegister.RegisterQueryLog(itemType.Name, grpConcatExpr, "group", result.Count().ToString());
                 }
                 catch (Exception ex)
