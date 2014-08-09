@@ -74,6 +74,14 @@ namespace System.Linq.Dynamic.BitWise.Service
 
                         result = Compressor.ZipText(result);
                     }
+
+                    try
+                    {
+                        QueryRegister.RegisterQueryLog(itemType.Name, bwqExpr, "query", result.Count().ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                    }
                 }
 
                 return result;
@@ -98,7 +106,7 @@ namespace System.Linq.Dynamic.BitWise.Service
 
                     try
                     {
-                        QueryRegister.RegisterQueryLog(queryClass, bwqExpr, "filter", result.Count().ToString());
+                        QueryRegister.RegisterQueryLog(itemType.Name, bwqExpr, "filter", result.Count().ToString());
                     }
                     catch (Exception ex)
                     {
@@ -128,6 +136,14 @@ namespace System.Linq.Dynamic.BitWise.Service
 
                         result = Compressor.ZipText(result);
                     }
+
+                    try
+                    {
+                        QueryRegister.RegisterQueryLog(itemType.Name, bwqExpr, "order", result.Count().ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                    }
                 }
 
                 return result;
@@ -151,6 +167,14 @@ namespace System.Linq.Dynamic.BitWise.Service
 
                         result = Compressor.ZipText(result);
                     }
+
+                    try
+                    {
+                        QueryRegister.RegisterQueryLog(itemType.Name, bwqExpr, "order", result.Count().ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                    }
                 }
 
                 return result;
@@ -173,6 +197,15 @@ namespace System.Linq.Dynamic.BitWise.Service
 
                         result = Compressor.ZipText(result);
                     }
+                }
+
+                try
+                {
+                    string grpConcatExpr = string.Concat(grpExpr, " by ", _byExpr);
+                    QueryRegister.RegisterQueryLog(itemType.Name, grpConcatExpr, "group", result.Count().ToString());
+                }
+                catch (Exception ex)
+                {
                 }
 
                 return result;
