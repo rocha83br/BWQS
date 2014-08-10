@@ -67,20 +67,20 @@ namespace System.Linq.Dynamic.BitWise.Service
                     {
                         var qryResult = Query(bwqExpr, bool.TrueString);
 
+                        try
+                        {
+                            QueryRegister.RegisterQueryLog(itemType.Name, bwqExpr, "query", qryResult.Count.ToString());
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+
                         if (serialType.ToLower().Equals("xml"))
                             result = Serializer.SerializeXML(qryResult);
                         else
                             result = JsonConvert.SerializeObject(qryResult);
 
                         result = Compressor.ZipText(result);
-                    }
-
-                    try
-                    {
-                        QueryRegister.RegisterQueryLog(itemType.Name, bwqExpr, "query", result.Count().ToString());
-                    }
-                    catch (Exception ex)
-                    {
                     }
                 }
 
@@ -98,18 +98,18 @@ namespace System.Linq.Dynamic.BitWise.Service
                         var qryResult = Where(bwqExpr);
                         dataSouce = qryResult;
 
+                        try
+                        {
+                            QueryRegister.RegisterQueryLog(itemType.Name, bwqExpr, "filter", qryResult.Count.ToString());
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+
                         if (serialType.ToLower().Equals("xml"))
                             result = Serializer.SerializeXML(qryResult);
                         else
                             result = JsonConvert.SerializeObject(qryResult);
-                    }
-
-                    try
-                    {
-                        QueryRegister.RegisterQueryLog(itemType.Name, bwqExpr, "filter", result.Count().ToString());
-                    }
-                    catch (Exception ex)
-                    {
                     }
 
                     result = Compressor.ZipText(result);
@@ -129,20 +129,20 @@ namespace System.Linq.Dynamic.BitWise.Service
                         var qryResult = OrderBy(bwqExpr);
                         dataSouce = qryResult;
 
+                        try
+                        {
+                            QueryRegister.RegisterQueryLog(itemType.Name, bwqExpr, "order", qryResult.Count.ToString());
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+
                         if (serialType.ToLower().Equals("xml"))
                             result = Serializer.SerializeXML(qryResult);
                         else
                             result = JsonConvert.SerializeObject(qryResult);
 
                         result = Compressor.ZipText(result);
-                    }
-
-                    try
-                    {
-                        QueryRegister.RegisterQueryLog(itemType.Name, bwqExpr, "order", result.Count().ToString());
-                    }
-                    catch (Exception ex)
-                    {
                     }
                 }
 
@@ -160,20 +160,20 @@ namespace System.Linq.Dynamic.BitWise.Service
                         var qryResult = OrderByDescending(bwqExpr);
                         dataSouce = qryResult;
 
+                        try
+                        {
+                            QueryRegister.RegisterQueryLog(itemType.Name, bwqExpr, "order", qryResult.Count.ToString());
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+
                         if (serialType.ToLower().Equals("xml"))
                             result = Serializer.SerializeXML(qryResult);
                         else
                             result = JsonConvert.SerializeObject(qryResult);
 
                         result = Compressor.ZipText(result);
-                    }
-
-                    try
-                    {
-                        QueryRegister.RegisterQueryLog(itemType.Name, bwqExpr, "order", result.Count().ToString());
-                    }
-                    catch (Exception ex)
-                    {
                     }
                 }
 
@@ -190,6 +190,15 @@ namespace System.Linq.Dynamic.BitWise.Service
                     {
                         var qryResult = GroupBy(grpExpr, _byExpr);
 
+                        try
+                        {
+                            string grpConcatExpr = string.Concat(_byExpr, "][", grpExpr);
+                            QueryRegister.RegisterQueryLog(itemType.Name, grpConcatExpr, "group", qryResult.Count.ToString());
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+
                         if (serialType.ToLower().Equals("xml"))
                             result = Serializer.SerializeXML(qryResult);
                         else
@@ -197,15 +206,6 @@ namespace System.Linq.Dynamic.BitWise.Service
 
                         result = Compressor.ZipText(result);
                     }
-                }
-
-                try
-                {
-                    string grpConcatExpr = string.Concat(_byExpr, "][", grpExpr);
-                    QueryRegister.RegisterQueryLog(itemType.Name, grpConcatExpr, "group", result.Count().ToString());
-                }
-                catch (Exception ex)
-                {
                 }
 
                 return result;
