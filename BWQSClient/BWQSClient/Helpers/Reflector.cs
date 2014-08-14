@@ -22,16 +22,16 @@ namespace BWQS_Client.Helpers
 
         public static void CloneObjectData(object source, object destination)
         {
-            foreach (var prp in getObjectProps(source))
+            foreach (var prp in GetObjectProps(source))
                 if (prp.CanWrite)
-                    if (getObjectProps(destination, prp.Name).Length > 0)
+                    if (GetObjectProps(destination, prp.Name).Length > 0)
                     {
                         if (!prp.PropertyType.Namespace.Equals(source.GetType().Namespace))
-                            getObjectProps(destination, prp.Name)[0].SetValue(destination,
+                            GetObjectProps(destination, prp.Name)[0].SetValue(destination,
                                                         prp.GetValue(source, null), null);
                         else
                             CloneObjectData(prp.GetValue(source, null),
-                                            getObjectProps(destination, prp.Name)[0]
+                                            GetObjectProps(destination, prp.Name)[0]
                                             .GetValue(destination, null));
                     }
                     else
@@ -43,17 +43,7 @@ namespace BWQS_Client.Helpers
                     }
         }
 
-        #endregion
-
-        #region Helper Methods
-
-        /// <summary>
-        /// Obtem lista filtrada ou não das propriedades de um objeto
-        /// </summary>
-        /// <author>Renato Rocha, 2014</author>
-        /// <param name="source">Instância do objeto</param>
-        /// <param name="filter">Lista filtro com identificadores das propriedades a obter</param>
-        internal static PropertyInfo[] getObjectProps(object source, params object[] filter)
+        public static PropertyInfo[] GetObjectProps(object source, params object[] filter)
         {
             List<PropertyInfo> result = new List<PropertyInfo>();
             var objProps = source.GetType().GetProperties();
@@ -85,9 +75,9 @@ namespace BWQS_Client.Helpers
             if (result.Count == 0)
             {
                 string strFilters = string.Empty;
-                foreach(var flt in filter)
+                foreach (var flt in filter)
                     strFilters += string.Concat(flt.ToString(), ", ");
-                
+
                 //throw new Exception(string.Concat("Attribute(s) ", 
                 //                    strFilters.Substring(0, strFilters.Length - 2), 
                 //                    " not found in type ", source.GetType().Name));
@@ -96,34 +86,18 @@ namespace BWQS_Client.Helpers
             return result.ToArray();
         }
 
-        /// <summary>
-        /// Obtem a relação de instâncias das classes filho de um objeto
-        /// </summary>
-        /// <author>Renato Rocha, 2014</author>
-        /// <param name="source">Instância do objeto</param>
-        /// <returns>object</returns>
-        internal static object[] getObjectChilds(object destination)
+        public static object[] GetObjectPropValues(object source, PropertyInfo[] properties)
         {
-            var result = new List<object>();
-            List<PropertyInfo> childProps = new List<PropertyInfo>();
+            List<object> result = new List<object>();
 
-            foreach (var prp in destination.GetType().GetProperties())
-                if (prp.PropertyType.Namespace.Equals(destination.GetType().Namespace))
-                    childProps.Add(prp);
-
-            foreach (var child in childProps)
-                result.Add(child.GetValue(destination, null));
+            if (properties != null)
+                foreach (var prp in properties)
+                    result.Add(prp.GetValue(source, null));
 
             return result.ToArray();
         }
 
-        /// <summary>
-        /// Obtem o valor do atributo do objeto formatado conforme seu tipo
-        /// </summary>
-        /// <author>Renato Rocha, 2014</author>
-        /// <param name="propValue">Atributo do objeto</param>
-        /// <returns>object</returns>
-        internal static object getTypedValue(Type propType, object propValue)
+        public static object GetTypedValue(Type propType, object propValue)
         {
             object typedValue = null;
 
@@ -139,25 +113,45 @@ namespace BWQS_Client.Helpers
                     typedValue = long.Parse(propValue.ToString());
                 else if (propType.FullName.Contains("Decimal"))
                     typedValue = decimal.Parse(propValue.ToString());
-                else if (propType.FullName.Contains("Float"))
-                    typedValue = float.Parse(propValue.ToString());
                 else if (propType.FullName.Contains("Double"))
                     typedValue = double.Parse(propValue.ToString());
-                else if (propValue.GetType().FullName.Contains("String"))
+                else if (propType.FullName.Contains("Float"))
+                    typedValue = float.Parse(propValue.ToString());
+                else if (propType.FullName.Contains("Single"))
+                    typedValue = Single.Parse(propValue.ToString());
+                else if (propType.FullName.Contains("Short"))
+                    typedValue = short.Parse(propValue.ToString());
+                else if (propType.FullName.Contains("Boolean"))
+                    typedValue = bool.Parse(propValue.ToString());
+                else if (propType.FullName.Contains("String"))
                     typedValue = propValue.ToString();
-                else if (propValue.GetType().FullName.Contains("DateTime"))
-                {
-                    if (propValue.ToString().Contains("00:00:00"))
-                        typedValue = propValue.ToString().Replace("00:00:00", string.Empty);
-                    else
-                        typedValue = DateTime.Parse(propValue.ToString());
-                }
+                else if (propType.FullName.Contains("DateTime"))
+                    typedValue = DateTime.Parse(propValue.ToString());
                 else
                     typedValue = propValue;
 
             return typedValue;
         }
-     
+
+        #endregion
+
+        #region Helper Methods
+
+        internal static object[] getObjectChilds(object destination)
+        {
+            var result = new List<object>();
+            List<PropertyInfo> childProps = new List<PropertyInfo>();
+
+            foreach (var prp in destination.GetType().GetProperties())
+                if (prp.PropertyType.Namespace.Equals(destination.GetType().Namespace))
+                    childProps.Add(prp);
+
+            foreach (var child in childProps)
+                result.Add(child.GetValue(destination, null));
+
+            return result.ToArray();
+        }
+
         #endregion
     }
 
@@ -174,8 +168,8 @@ namespace BWQS_Client.Helpers
         {
             T destination = Activator.CreateInstance<T>();
 
-            foreach (var prp in Reflector.getObjectProps(source))
-                Reflector.getObjectProps(destination, prp.Name)[0].SetValue(destination,
+            foreach (var prp in Reflector.GetObjectProps(source))
+                Reflector.GetObjectProps(destination, prp.Name)[0].SetValue(destination,
                                                                    prp.GetValue(source, null), null);
 
             return destination;

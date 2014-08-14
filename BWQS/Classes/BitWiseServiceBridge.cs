@@ -47,8 +47,10 @@ namespace System.Linq.Dynamic.BitWise.Service
 
                     if (unpackedSource.Contains("xml"))
                         dataSouce = Serializer.DeserializeXML(unpackedSource, classType);
-                    else
+                    else if ((unpackedSource.StartsWith("[")) || (unpackedSource.StartsWith("{")))
                         dataSouce = JsonConvert.DeserializeObject(unpackedSource, classType);
+                    else
+                        dataSouce = Serializer.DeserializeCSV(unpackedSource, itemType);
                 }
                 catch (Exception ex)
                 {
@@ -75,10 +77,7 @@ namespace System.Linq.Dynamic.BitWise.Service
                         {
                         }
 
-                        if (serialType.ToLower().Equals("xml"))
-                            result = Serializer.SerializeXML(qryResult);
-                        else
-                            result = JsonConvert.SerializeObject(qryResult);
+                        result = getSerialObject(qryResult, serialType);
 
                         result = Compressor.ZipText(result);
                     }
@@ -106,10 +105,7 @@ namespace System.Linq.Dynamic.BitWise.Service
                         {
                         }
 
-                        if (serialType.ToLower().Equals("xml"))
-                            result = Serializer.SerializeXML(qryResult);
-                        else
-                            result = JsonConvert.SerializeObject(qryResult);
+                        result = getSerialObject(qryResult, serialType);
                     }
 
                     result = Compressor.ZipText(result);
@@ -137,10 +133,7 @@ namespace System.Linq.Dynamic.BitWise.Service
                         {
                         }
 
-                        if (serialType.ToLower().Equals("xml"))
-                            result = Serializer.SerializeXML(qryResult);
-                        else
-                            result = JsonConvert.SerializeObject(qryResult);
+                        result = getSerialObject(qryResult, serialType);
 
                         result = Compressor.ZipText(result);
                     }
@@ -168,10 +161,7 @@ namespace System.Linq.Dynamic.BitWise.Service
                         {
                         }
 
-                        if (serialType.ToLower().Equals("xml"))
-                            result = Serializer.SerializeXML(qryResult);
-                        else
-                            result = JsonConvert.SerializeObject(qryResult);
+                        result = getSerialObject(qryResult, serialType);
 
                         result = Compressor.ZipText(result);
                     }
@@ -199,10 +189,7 @@ namespace System.Linq.Dynamic.BitWise.Service
                         {
                         }
 
-                        if (serialType.ToLower().Equals("xml"))
-                            result = Serializer.SerializeXML(qryResult);
-                        else
-                            result = JsonConvert.SerializeObject(qryResult);
+                        result = getSerialObject(qryResult, serialType);
 
                         result = Compressor.ZipText(result);
                     }
@@ -238,6 +225,16 @@ namespace System.Linq.Dynamic.BitWise.Service
                 typeTmpList.Add(itemType);
                 
                 return engineType.MakeGenericType(typeTmpList.ToArray());
+            }
+
+            private string getSerialObject(IList qryResult, string serialType)
+            {
+                if (serialType.ToLower().Equals("xml"))
+                    return Serializer.SerializeXML(qryResult);
+                else if (serialType.ToLower().Equals("csv"))
+                    return Serializer.SerializeCSV(qryResult);
+                else
+                    return JsonConvert.SerializeObject(qryResult);
             }
 
             private IList Query(string bwqExpr, string standAlone)

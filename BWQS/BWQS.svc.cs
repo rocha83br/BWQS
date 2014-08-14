@@ -26,12 +26,12 @@ namespace System.Linq.Dynamic.BitWise.Service
             internalEngine.Initialize(packedAssemblyBuffer, className, packedDataSource);
         }
 
-        public string Query(string bwqExpr)
+        public string Query(string bwqExpr, string serialType)
         {
             if (internalEngine == null)
                 throw new TypeInitializationException(initilizeMsg, null);
 
-            return internalEngine.Query(bwqExpr, "True", "json");
+            return internalEngine.Query(bwqExpr, "True", serialType);
         }
 
         public string Where(string bwqExpr, string serialType)

@@ -22,9 +22,13 @@ namespace System.Linq.Dynamic.BitWise
             string serialDataSource = string.Empty;
 
             if (serialType.Equals("xml"))
-                serialDataSource = Compressor.ZipText(Serializer.SerializeXML(dataSource));
+                serialDataSource = Serializer.SerializeXML(dataSource);
+            else if (serialType.Equals("csv"))
+                serialDataSource = Serializer.SerializeCSV(dataSource as IList);
             else
-                serialDataSource = Compressor.ZipText(JsonConvert.SerializeObject(dataSource));
+                serialDataSource = JsonConvert.SerializeObject(dataSource);
+
+            serialDataSource = Compressor.ZipText(serialDataSource);
 
             bwqsInstance.Initialize(asmBuffer, sourceType.FullName, serialDataSource);
 
@@ -43,8 +47,10 @@ namespace System.Linq.Dynamic.BitWise
 
             if (queryResult.Contains("xml"))
                 typedResult = Serializer.DeserializeXML(queryResult, typeof(List<T>)) as List<T>;
-            else
+            else if (queryResult.StartsWith("[") || queryResult.StartsWith("{"))
                 typedResult = JsonConvert.DeserializeObject<List<T>>(queryResult);
+            else
+                typedResult = Serializer.DeserializeCSV(queryResult, typeof(T)) as List<T>;
 
             return typedResult;
         }
@@ -85,7 +91,7 @@ namespace System.Linq.Dynamic.BitWise
             if (internalEngine == null)
                 throw new TypeInitializationException(initilizeMsg, null);
 
-            return Compressor.UnZipText(internalEngine.Query(extExpr));
+            return Compressor.UnZipText(internalEngine.Query(extExpr, internalSerialType));
         }
 
         public static string Where(string extExpr)
