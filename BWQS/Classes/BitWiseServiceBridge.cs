@@ -77,6 +77,9 @@ namespace System.Linq.Dynamic.BitWise.Service
                         {
                         }
 
+                        if (serialType.ToLower().Equals("xml"))
+                            serialType = "json";
+
                         result = getSerialObject(qryResult, serialType);
 
                         result = Compressor.ZipText(result);
