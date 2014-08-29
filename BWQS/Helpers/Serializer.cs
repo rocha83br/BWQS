@@ -103,7 +103,16 @@ namespace System.Linq.Dynamic.BitWise.Helpers
                     var ObjPropValues = Reflector.GetObjectPropValues(src, objProps);
                     foreach (var prpVal in ObjPropValues)
                     {
-                        var objPrpValue = prpVal.ToString();
+						if (prpVal != null)
+                        {
+                            var objPrpValue = prpVal.ToString();
+                            if (decimal.TryParse(prpVal.ToString(), out fakeNum))
+                                objPrpValue = objPrpValue.Replace(".", string.Empty).Replace(",", ".");
+                            result.Append(string.Concat(objPrpValue.ToString(), ";"));
+                        }
+                        else
+                            result.Append("null;");
+                        
                         if (decimal.TryParse(prpVal.ToString(), out fakeNum))
                             objPrpValue = objPrpValue.Replace(".", string.Empty).Replace(",", ".");
 
