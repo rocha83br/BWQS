@@ -119,11 +119,6 @@ namespace BWQS_Client.Helpers
                         }
                         else
                             result.Append("null;");
-							
-                        if (decimal.TryParse(prpVal.ToString(), out fakeNum))
-                            objPrpValue = objPrpValue.Replace(".", string.Empty).Replace(",", ".");
-
-                        result.Append(string.Concat(objPrpValue.ToString(), ";"));
                     }
 
                     result.Remove(result.Length - 1, 1);
