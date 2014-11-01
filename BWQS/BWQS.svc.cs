@@ -74,5 +74,34 @@ namespace System.Linq.Dynamic.BitWise.Service
         }
 
         #endregion        
+
+        #region Public Methods Aliases
+
+        public string Q(string bwqExpr, string serialType)
+        {
+            return Query(bwqExpr, serialType);
+        }
+
+        public string W(string bwqExpr, string serialType)
+        {
+            return Where(bwqExpr, serialType);
+        }
+
+        public string O(string bwqExpr, string serialType)
+        {
+            return OrderBy(bwqExpr, serialType);
+        }
+
+        public string OD(string bwqExpr, string serialType)
+        {
+            return OrderByDescending(bwqExpr, serialType);
+        }
+
+        public string G(string grpExpr, string _byExpr, string serialType)
+        {
+            return GroupBy(grpExpr, _byExpr);
+        }
+
+        #endregion
     }
 }

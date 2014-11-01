@@ -29,6 +29,23 @@ namespace System.Linq.Dynamic.BitWise.Service
         [OperationContract]
         string GroupBy(string grpExpr, string _byExpr);
 
+        //---
+
+        [OperationContract]
+        string Q(string bwqExpr, string serialType);
+
+        [OperationContract]
+        string W(string bwqExpr, string serialType);
+
+        [OperationContract]
+        string O(string bwqExpr, string serialType);
+
+        [OperationContract]
+        string OD(string bwqExpr, string serialType);
+
+        [OperationContract]
+        string G(string grpExpr, string _byExpr, string serialType);
+
         [OperationContract]
         GroupResult GetGroupResult();
     }
