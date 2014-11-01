@@ -94,10 +94,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:4165/BWQS.svc">
+    <WebReferenceUrl Include="http://bwqs.pccs.com.br/BWQS.svc">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\BWQS\</RelPath>
-      <UpdateFromURL>http://localhost:4165/BWQS.svc</UpdateFromURL>
+      <UpdateFromURL>http://bwqs.pccs.com.br/BWQS.svc</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

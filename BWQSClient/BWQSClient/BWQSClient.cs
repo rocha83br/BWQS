@@ -11,9 +11,15 @@ namespace System.Linq.Dynamic.BitWise
 {
     public static class BWQSClient
     {
+        #region Declarations
+
         private static string internalSerialType;
         private static BWQS.BWQS internalEngine;
         private static string initilizeMsg = "Initialize Engine First.";
+
+        #endregion
+
+        #region Public Methods
 
         public static void InitializeEngine(object dataSource, Type sourceType, string serialType)
         {
@@ -83,7 +89,7 @@ namespace System.Linq.Dynamic.BitWise
                 return grpResult;
             }
             else
-                return  JsonConvert.DeserializeObject<IList>(queryResult);
+                return JsonConvert.DeserializeObject<IList>(queryResult);
         }
 
         public static string Query(string extExpr)
@@ -99,7 +105,7 @@ namespace System.Linq.Dynamic.BitWise
             if (internalEngine == null)
                 throw new TypeInitializationException(initilizeMsg, null);
 
-            return  Compressor.UnZipText(internalEngine.Where(extExpr, internalSerialType));
+            return Compressor.UnZipText(internalEngine.Where(extExpr, internalSerialType));
         }
 
         public static string OrderBy(string extExpr)
@@ -107,7 +113,7 @@ namespace System.Linq.Dynamic.BitWise
             if (internalEngine == null)
                 throw new TypeInitializationException(initilizeMsg, null);
 
-            return  Compressor.UnZipText(internalEngine.OrderBy(extExpr, internalSerialType));
+            return Compressor.UnZipText(internalEngine.OrderBy(extExpr, internalSerialType));
         }
 
         public static string OrderByDescending(string extExpr)
@@ -115,7 +121,7 @@ namespace System.Linq.Dynamic.BitWise
             if (internalEngine == null)
                 throw new TypeInitializationException(initilizeMsg, null);
 
-            return  Compressor.UnZipText(internalEngine.OrderByDescending(extExpr, internalSerialType));
+            return Compressor.UnZipText(internalEngine.OrderByDescending(extExpr, internalSerialType));
         }
 
         public static string GroupBy(string grpExpr, string _byExpr)
@@ -123,7 +129,38 @@ namespace System.Linq.Dynamic.BitWise
             if (internalEngine == null)
                 throw new TypeInitializationException(initilizeMsg, null);
 
-            return  Compressor.UnZipText(internalEngine.GroupBy(grpExpr, _byExpr));
+            return Compressor.UnZipText(internalEngine.GroupBy(grpExpr, _byExpr));
         }
+
+        #endregion
+
+        #region Public Methods Aliases
+
+        public static string Q(string extExpr)
+        {
+            return Query(extExpr);
+        }
+
+        public static string W(string extExpr)
+        {
+            return Where(extExpr);
+        }
+
+        public static string O(string extExpr)
+        {
+            return OrderBy(extExpr);
+        }
+
+        public static string OD(string extExpr)
+        {
+            return OrderByDescending(extExpr);
+        }
+
+        public static string G(string grpExpr, string _byExpr)
+        {
+            return GroupBy(grpExpr, _byExpr);
+        }
+
+        #endregion
     }
 }
