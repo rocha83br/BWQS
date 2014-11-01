@@ -164,6 +164,42 @@ namespace BWQS_Client.Helpers
             return result.ToArray();
         }
 
+        public static List<T> DeserializeCSV<T>(string serialObject) where T : class
+        {
+            List<T> result = new List<T>();
+            StringReader csvReader = new StringReader(serialObject);
+            Type objectType = typeof(T);
+
+            string[] headerColumns = csvReader.ReadLine().Split(';');
+
+            string valueRow = string.Empty;
+            string[] valueCols = new string[0];
+            while (valueRow != null)
+            {
+                valueRow = csvReader.ReadLine();
+
+                if (valueRow != null)
+                {
+                    valueCols = valueRow.Split(';');
+
+                    T resultItem = Activator.CreateInstance(objectType) as T;
+
+                    int counter = 0;
+                    foreach (var hedCol in headerColumns)
+                    {
+                        var hedProp = objectType.GetProperty(hedCol);
+                        var colValue = valueCols[counter++];
+                        var typedValue = Reflector.GetTypedValue(hedProp.PropertyType, colValue);
+                        hedProp.SetValue(resultItem, typedValue, null);
+                    }
+
+                    result.Add(resultItem);
+                }
+            }
+
+            return result;
+        }
+
         public static byte[] SerializeBinary(object sourceObject)
         {
             BinaryFormatter binSerializer = new BinaryFormatter();

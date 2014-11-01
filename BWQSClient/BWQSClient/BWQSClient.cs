@@ -47,7 +47,7 @@ namespace System.Linq.Dynamic.BitWise
             internalEngine.Dispose();
         }
 
-        public static List<T> GetQueryResult<T>(string queryResult)
+        public static List<T> GetQueryResult<T>(string queryResult) where T : class
         {
             List<T> typedResult = null;
 
@@ -56,7 +56,7 @@ namespace System.Linq.Dynamic.BitWise
             else if (queryResult.StartsWith("[") || queryResult.StartsWith("{"))
                 typedResult = JsonConvert.DeserializeObject<List<T>>(queryResult);
             else
-                typedResult = Serializer.DeserializeCSV(queryResult, typeof(T)) as List<T>;
+                typedResult = Serializer.DeserializeCSV<T>(queryResult);
 
             return typedResult;
         }
