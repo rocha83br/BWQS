@@ -16,7 +16,7 @@ namespace System.Linq.Dynamic.BitWise.Service
             var clientIP = getClientIP();
             var logFilePath = Configuration.ConfigurationManager.AppSettings["LogPath"].ToString();
             var logFileName = string.Concat(DateTime.Now.ToString("yyyyMMdd_HHmm"), "_", clientIP.Replace(".", string.Empty).Replace("::", string.Empty), action.Substring(0, 1), ".txt");
-            var logContent = string.Format("On {0} the Client connected on address {1}, \n gave the Expression [{2}] to {3} a collection \n of {4} that generated {5} records result.", 
+            var logContent = string.Format("On {0} the Client connected from address {1}, \n gave the Expression [{2}] to {3} a collection \n of {4} that generated {5} records result.", 
                                              DateTime.Now.ToString("dd/MM/yyyy HH:mm"), clientIP, bwqExpr, action, className, resultCount);
 
             File.WriteAllText(string.Concat(logFilePath, logFileName), logContent);
