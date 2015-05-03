@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="BWQS_Client_System_Linq_Dynamic_BitWise_Service_BWQS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://bwqs.pccs.com.br/BWQS.svc</Value>
+      <Value Profile="(Default)">http://www.pccs.com.br/bwqs/BWQS.svc</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://bwqs.pccs.com.br/BWQS.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.Linq.Dynamic.BitWise.Service" />
+  <xs:import schemaLocation="http://www.pccs.com.br/bwqs/BWQS.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.Linq.Dynamic.BitWise.Service" />
   <xs:element name="Initialize">
     <xs:complexType>
       <xs:sequence>
@@ -87,6 +87,82 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="GroupByResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Q">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="bwqExpr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="serialType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="QResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="W">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="bwqExpr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="serialType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="WResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="O">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="bwqExpr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="serialType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="OResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OD">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="bwqExpr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="serialType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ODResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ODResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="G">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="grpExpr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_byExpr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="serialType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

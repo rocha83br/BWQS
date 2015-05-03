@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://bwqs.pccs.com.br/BWQS.svc?xsd=xsd1" filename="BWQS.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://bwqs.pccs.com.br/BWQS.svc?wsdl" filename="BWQS.wsdl" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://bwqs.pccs.com.br/BWQS.svc?disco" filename="BWQS.disco" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://bwqs.pccs.com.br/BWQS.svc?xsd=xsd2" filename="BWQS0.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://bwqs.pccs.com.br/BWQS.svc?xsd=xsd0" filename="BWQS1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://www.pccs.com.br/bwqs/BWQS.svc?wsdl" filename="BWQS.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://www.pccs.com.br/bwqs/BWQS.svc?xsd=xsd1" filename="BWQS.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://www.pccs.com.br/bwqs/BWQS.svc?xsd=xsd2" filename="BWQS0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://www.pccs.com.br/bwqs/BWQS.svc?xsd=xsd0" filename="BWQS1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://www.pccs.com.br/bwqs/BWQS.svc?disco" filename="BWQS.disco" />
   </Results>
 </DiscoveryClientResultsFile>
