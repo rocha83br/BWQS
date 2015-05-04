@@ -145,9 +145,14 @@ namespace System.Linq.Dynamic.BitWise.Helpers
                     foreach (var hedCol in headerColumns)
                     {
                         var hedProp = objectType.GetProperty(hedCol);
-                        var colValue = valueCols[counter++];
-                        var typedValue = Reflector.GetTypedValue(hedProp.PropertyType, colValue);
-                        hedProp.SetValue(resultItem, typedValue, null);
+
+                        if (!hedProp.PropertyType.Namespace.Equals(objectType.Namespace))
+                        {
+                            var colValue = valueCols[counter];
+                            var typedValue = Reflector.GetTypedValue(hedProp.PropertyType, colValue);
+                            hedProp.SetValue(resultItem, typedValue, null);
+                        }
+                        counter++;
                     }
 
                     result.Add(resultItem);
