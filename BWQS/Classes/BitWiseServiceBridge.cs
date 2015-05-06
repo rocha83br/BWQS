@@ -59,6 +59,29 @@ namespace System.Linq.Dynamic.BitWise.Service
             }
         }
 
+        public void Initialize(byte[] asmBuffer, string className, string serialData)
+        {
+            var asmInstance = Assembly.Load(asmBuffer);
+            queryClass = className;
+
+            try
+            {
+                classType = getTypeCollection();
+
+                if (serialData.Contains("xml"))
+                    dataSouce = Serializer.DeserializeXML(serialData, classType);
+                else if ((serialData.StartsWith("[")) || (serialData.StartsWith("{")))
+                    dataSouce = JsonConvert.DeserializeObject(serialData, classType);
+                else
+                    dataSouce = Serializer.DeserializeCSV(serialData, itemType);
+            }
+            catch (Exception ex)
+            {
+                // Debug only
+                throw ex;
+            }
+        }
+
         public string Query(string bwqExpr, string serialResult, string serialType)
         {
             var result = string.Empty;

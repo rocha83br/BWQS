@@ -26,6 +26,12 @@ namespace System.Linq.Dynamic.BitWise.Service
             internalEngine.Initialize(packedAssemblyBuffer, className, packedDataSource);
         }
 
+        public void Initialize(byte[] assemblyBuffer, string className, string serialData)
+        {
+            internalEngine = new BitWiseServiceBridge();
+            internalEngine.Initialize(assemblyBuffer, className, serialData);
+        }
+
         public string Query(string bwqExpr, string serialType)
         {
             if (internalEngine == null)

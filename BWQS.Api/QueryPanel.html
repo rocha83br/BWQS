@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>BitWise Query Api Demo</title>
+</head>
+<body>
+    <div style="margin-left: 2%; margin-top: 2%">
+        <form id="frmSendModel" method="post" enctype="multipart/form-data" action="QueryPanel.html">
+            <input id="fileUpload" type="file" title="Give me your .Net model lib :" />
+            <br />
+            <br />
+            <label for="txtApiUri">Give me the api uri/expr and Send !  ;-)</label><br />
+            <input id="txtApiUri" type="text" style="width: 35%" />
+            <br />
+            <br />
+            <input type="button" value="Send" onclick="ajaxSubmit()" />
+        </form>
+    </div>
+</body>
+<script type="text/javascript">
+
+	var file = undefined;
+
+	function getFile(evt) {
+	    
+		file = evt.target.files[0];
+	}
+	
+    function ajaxSubmit(evt) {
+
+        if (file == undefined)
+            return alert("Please select a .net model library to upload");
+
+        if (document.getElementById("txtApiUri").value.trim() == '')
+            return alert("Please inform the api uri/query expression");
+
+        var formData = new FormData();
+
+        formData.append("modelLib", file);
+
+        var request = new XMLHttpRequest();
+        request.open("POST", "api/init");
+        request.send(formData);
+    }
+	
+	document.getElementById('fileUpload').addEventListener('change', getFile, false);
+	
+</script>
+</html>

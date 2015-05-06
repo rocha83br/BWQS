@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWQS", "BWQS\BWQS.csproj", "{FAC4CE0D-53BD-4F93-B01A-909515042663}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWQS.Api", "BWQS.Api\BWQS.Api.csproj", "{A27CDEE0-8A3D-44B0-88BC-BFA135449875}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{FAC4CE0D-53BD-4F93-B01A-909515042663}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAC4CE0D-53BD-4F93-B01A-909515042663}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAC4CE0D-53BD-4F93-B01A-909515042663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A27CDEE0-8A3D-44B0-88BC-BFA135449875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A27CDEE0-8A3D-44B0-88BC-BFA135449875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A27CDEE0-8A3D-44B0-88BC-BFA135449875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A27CDEE0-8A3D-44B0-88BC-BFA135449875}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
