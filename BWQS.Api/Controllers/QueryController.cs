@@ -12,7 +12,7 @@ namespace System.Linq.Dynamic.BitWise.Service.Api
     {
         public string Get(string query, string type)
         {
-            return new BWQS().Query(query, type);
+            return ServiceBridge.Query(query, type);
         }
     }
 }

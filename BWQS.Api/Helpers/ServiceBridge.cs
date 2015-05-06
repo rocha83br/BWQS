@@ -13,5 +13,10 @@ namespace System.Linq.Dynamic.BitWise.Service.Api
         {
             svcInstance.Initialize(asmBuffer, className, serialData);
         }
+
+        public static string Query(string bwqExpr, string returnType)
+        {
+            return svcInstance.Query(bwqExpr, returnType);
+        }
     }
 }

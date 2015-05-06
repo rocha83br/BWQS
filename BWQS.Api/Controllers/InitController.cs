@@ -16,7 +16,7 @@ namespace System.Linq.Dynamic.BitWise.Service.Api
         public void Post()
         {
             // Obtem o buffer da biblioteca de modelos do cliente para realizar as consultas
-            // Obtem os valores do modelo a utilizar e a fonte de dados composta JSON/XML/CSV
+            // Obtem o nome do modelo a utilizar e a fonte de dados composta JSON/XML/CSV
             if (HttpContext.Current.Request.Files.Count > 0)
             {
                 MemoryStream asmBuffer = new MemoryStream();
